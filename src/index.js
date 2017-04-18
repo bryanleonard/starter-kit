@@ -1,5 +1,6 @@
 import numeral from 'numeral';
 import './index.css';
+import $ from 'jquery';
 
 import {getUsers} from './api/userApi';
 
@@ -13,6 +14,8 @@ let span = document.querySelector('span');
 el.innerHTML = `Good day`;
 span.innerHTML = `${courseValue}`;
 
+let $elz = $('h1');
+
 getUsers().then(result => {
 	let usersBody = "";
 
@@ -25,6 +28,8 @@ getUsers().then(result => {
 			<td>${user.email}</td>
 			</tr>`
 	});
+
+$elz.text("Updated with JQuizzle");
 
 	document.getElementById('users').innerHTML = usersBody;
 })

@@ -1,58 +1,56 @@
+// NOT for actual production use. This is useful for hosting the minifed build files for local debugging.
+
 import express from 'express';
 import path from 'path';
 import open from 'open';
-import webpack from 'webpack';
-import config from '../webpack.config.dev.js';
+import compression from 'compression';
 
 /* eslint-disable no-console */
 
 const port = 3000;
 const app = express();
-const compiler = webpack(config);
 
-app.use(require('webpack-dev-middleware')(compiler, {
-	noInfo: true,
-	publicPath: config.output.publicPath
-}));
+app.use(compression()); //gzip that shit
+app.use(express.static('dist'));
 
 app.get('/', function(req, res) {
-	res.sendFile(path.join(__dirname, '../src/index.html'));
+	res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 app.get('/users', function(req, res) {
 	// Hard coding for simplicity. Pretend this hits a real database
 	res.json([
 		{
-			"id": 1,
+			"id": 100,
 			"firstName":"Bob",
 			"lastName":"Smith",
 			"email":"bob@gmail.com"
 		},
 		{
-			"id": 2,
+			"id": 200,
 			"firstName":"Tammy",
 			"lastName":"Norton",
 			"email":"tnorton@yahoo.com"},
 		{
-			"id": 3,
+			"id": 300,
 			"firstName":"Tina",
 			"lastName":"Lee",
 			"email":"lee.tina@hotmail.com"
 		},
 		{
-			"id": 4,
+			"id": 400,
 			"firstName": "Finley",
 			"lasttName": "Marshall",
 			"email": "finleymarshall@talae.com"
 		},
 		{
-			"id": 5,
+			"id": 500,
 			"firstName": "Jayne",
 			"lasttName": "Norris",
 			"email": "jaynenorris@talae.com"
 		},
 		{
-			"id": 6,
+			"id": 600,
 			"firstName": "Gay",
 			"lasttName": "Gomez",
 			"email": "gaygomez@talae.com"

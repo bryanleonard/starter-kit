@@ -13,9 +13,9 @@ describe ('index.html', () => {
 		const index = fs.readFileSync('./src/index.html', "utf-8");
 
 		jsdom.env(index, function(err, window) {
-			const h2 = window.document.getElementsByTagName('h2')[0];
+			const h1 = window.document.getElementsByTagName('h1')[0];
 
-			expect(h2.innerHTML).to.equal("Yay!!!");
+			expect(h1.innerHTML).to.equal("Welcome!");
 			done();
 			window.close() //free up memory
 		});
@@ -23,13 +23,13 @@ describe ('index.html', () => {
 })
 
 describe ('index.html', () => {
-	it('H3 should say Users', (done) => {
+	it('h2 should say Users', (done) => {
 		const index = fs.readFileSync('./src/index.html', "utf-8");
 
 		jsdom.env(index, function(err, window) {
-			const h3 = window.document.getElementsByTagName('h3')[0];
+			const h2 = window.document.getElementsByTagName('h2')[0];
 
-			expect(h3.innerHTML).to.equal("Users");
+			expect(h2.innerHTML).to.equal("Users");
 			done();
 			window.close() //free up memory
 		});
