@@ -2,6 +2,8 @@ import path from 'path';
 import webpack from 'webpack';
 import HTMLWebpackPlugin from  'html-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+
 
 export default {
 	debug: true,
@@ -20,14 +22,18 @@ export default {
 	},
 	plugins: [
 
+		// Generate and external CSS file with has in the filename
+		new ExtractTextPlugin('[name].[contenthash].css', {
+			allChunks: true
+		}),
+
 		// Hash the files using MD5 so their names change when the content changes. Bust data cache.
 		new WebpackMd5Hash(),
 
 		//Jquery sucka
 		new webpack.ProvidePlugin({
 			$: "jquery",
-			jQuery: "jquery",
-			"window.jQuery": "jquery"
+			jQuery: "jquery"
 		}),
 
 		//CommonsChunkPlugin to create separate bundles
@@ -48,12 +54,10 @@ export default {
 				removeStyleLinkTypeAttributes: true,
 				keepClosingSlash: true,
 				minifyJS: true,
-				minifyCSS: true,
+				minifyCSS: false,
 				minifyURLs: true
 			}
 		}),
-
-
 
 		//Eliminate duplicate packages when generating bundle
 		new webpack.optimize.DedupePlugin(),
@@ -64,9 +68,8 @@ export default {
 	],
 	module: {
 		loaders: [
-		{test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
-		{test: /\.css$/, loaders: ['style', 'css']}
-
+			{test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
+			{test: /\.css$/, loader: ExtractTextPlugin.extract('css?sourceMap')}
 		]
 	}
 }

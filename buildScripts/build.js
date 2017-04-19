@@ -25,9 +25,9 @@ webpack(webpackConfig).run((err, stats) => {
 	}
 
 	// Show 'em whatcha workin' with.
-	console.log(`👾 ************************************************ 👾`);
+	console.log(`👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾`);
 	console.log(`Webpack stats: ${stats}`);
-	console.log(`👾 ************************************************ 👾`);
+	console.log(`👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾`);
 
 	// If all things are go, the build succeeded.
 	console.log(chalk.green(`App has been build for production and written to ${process.env.NODE_ENV}.`));
